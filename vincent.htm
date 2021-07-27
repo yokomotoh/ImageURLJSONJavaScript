@@ -35,6 +35,15 @@
             width: 300px;
             height: auto;
         }
+    
+        #largeImage {
+          width: 500px;
+          height: auto;
+          position: absolute;
+          left: 300px;
+          top: 200px; /* Or perhaps different coordinates */
+          display: none;
+        }
     </style>
 </head>
 <body>
@@ -49,7 +58,7 @@
     <input type="button" onclick="CreateTableFromJSON()" value="Create Table From JSON" />
     <p id="showData"></p>
     -->
-    
+    <img id="largeImage" alt="">
 </body>
 <script>
     function showDataWithImages(json_name) {
@@ -145,9 +154,19 @@
                          //    window.location.href = img.src;
                          //};
                          
-                         img.addEventListener("click", function() {
-                           console.log("clicked");
-                         })
+                         //img.addEventListener("click", function() {
+                         //  console.log("clicked");
+                         //})
+                         
+                         img.onclick = function() {
+                             var largeImage = document.getElementById('largeImage');
+                             largeImage.style.display = 'block';
+                             //largeImage.style.width=200+"px";
+                             //largeImage.style.height=200+"px";
+                             //var url=largeImage.getAttribute('src');
+                             var url = this.getAttribute('src');
+                             window.open(url,'Image', 'resizable=1');//,'width=largeImage.style.width,height=largeImage.style.height,resizable=1');
+                         };
                          
                          tabCell.appendChild(img);
                      }
