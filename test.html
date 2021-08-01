@@ -3,7 +3,7 @@
     <title>Famille Vincent</title>
     <style>
         #birds {
-            width: 500px;
+            width: 1000px;
             text-align: center;
             overflow: hidden;
             padding: 3px;
@@ -48,8 +48,10 @@
 </head>
 <body>
     <p> Click the button to see... </p>
-    <p><input type="button" onclick="showDataWithImages(this.value)" value="famille_vincent_2005" />
-    <input type="button" onclick="showDataWithImages(this.value)" value="famille_vincent_2006" />
+    <p>
+    <input type="button" onclick="showDataWithImages(this.value)" value="_Autoportraits" />
+    <input type="button" onclick="showDataWithImages(this.value)" value="_Gravures_InfinisMonotypes" />
+    <input type="button" onclick="showDataWithImages(this.value)" value="_pictures_Vincent_z 1 Famille Vincent 2005" />
     </p>
     <!--
     <div id='birds'></div>
@@ -109,15 +111,18 @@
         }
         
         function CreateTableFromJSON(json) {
-             var arrItems = [];
+             // var arrItems = [];
+             var arrItems = {};
              arrItems = JSON.parse(json);     // Populate array with JSON data.
 
              // EXTRACT VALUE FOR HTML HEADER.
              // ('Book ID', 'Book Name', 'Category' and 'Price')
              var col = [];
-             for (var i = 0; i < arrItems.length; i++) {
+             //for (var i = 0; i < arrItems.length; i++) {
+             for (var i in arrItems) {
                  for (var key in arrItems[i]) {
-                     if (col.indexOf(key) === -1) {
+                 //for (var key in enumerate(arrItems[i])) {
+                         if (col.indexOf(key) === -1) {
                          col.push(key);
                      }
                  }
@@ -137,17 +142,20 @@
              }
 
              // ADD JSON DATA TO THE TABLE AS ROWS.
-             for (var i = 0; i < arrItems.length; i++) {
+             //for (var i = 0; i < arrItems.length; i++) {
+             for (var i in arrItems) {
 
                  tr = table.insertRow(-1);
 
                  for (var j = 0; j < col.length; j++) {
                      var tabCell = tr.insertCell(-1);
                      
-                     if (col[j] === "Image") {
+                     //if (col[j] === "Image") {
+                     if (col[j] === "url") {
                          
                          var img = document.createElement('img');    // Create an <img> element.
                          img.src = arrItems[i].Image;                // The image source from JSON array.
+                         img.src = arrItems[i].url;                // The image source from JSON array.
 
                          tabCell.setAttribute('style', 'border-left: solid 1px #ddd;');
                          
@@ -166,7 +174,8 @@
                              //largeImage.style.height=200+"px";
                              //var url=largeImage.getAttribute('src');
                              var url = this.getAttribute('src');
-                             window.open(url,'Image', 'resizable=1');//,'width=largeImage.style.width,height=largeImage.style.height,resizable=1');
+                             //window.open(url,'Image', 'resizable=1');//,'width=largeImage.style.width,height=largeImage.style.height,resizable=1');
+                             window.open(url,'url', 'resizable=1');//,'width=largeImage.style.width,height=largeImage.style.height,resizable=1');
                          };
                          
                          tabCell.appendChild(img);
